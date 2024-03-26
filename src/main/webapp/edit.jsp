@@ -36,7 +36,10 @@
 					<label style="font-size:1.4rem; padding-right:20px;" for="file">이미지 업로드</label>
 					<input type="file" name="file" id="file">
 					<br>
+					<c:if test="${board.img != null}">
 					<img alt="업로드 이미지" src="${board.img}" width="100"/>
+					</c:if>
+					<input type="hidden" name="origin_file" value="${board.img}">
 				</div>
 				</div>
 			</form>

@@ -35,7 +35,7 @@ public class BoardDAO {
 		Connection conn = open(); //DB 커넥션 열기
 		ArrayList<Board> boardList = new ArrayList<>();
 		
-		String sql = "SELECT BOARD_NO ,TITLE ,USER_ID , TO_CHAR(REG_DATE,'yyyy.mm.dd') reg_date,views FROM BOARD"; //쿼리문
+		String sql = "SELECT BOARD_NO ,TITLE ,USER_ID , TO_CHAR(REG_DATE,'yyyy.mm.dd') reg_date,views FROM BOARD order by board_no"; //쿼리문
 		PreparedStatement pstmt = conn.prepareStatement(sql); //쿼리문 등록
 		ResultSet rs = pstmt.executeQuery(); //쿼리문 실행 ->데이터베이스 결과 저장
 		

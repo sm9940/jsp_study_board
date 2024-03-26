@@ -41,7 +41,10 @@
 				<!-- white-space(공백,줄바꿈 규칙 적용)  -->
 				<!-- white-space:pre-wrap(div 영역 안에서 감싸면서 줄바꿈)  -->
 				<div class="cont" style="white-space:pre-wrap;">${board.content}</div>
+				<c:if test= "${board.img !=null}">
 				<div class="cont"><img src = "${board.img}" alt="업로드 이미지"></div>
+				</c:if>
+				
 			</div>
 			<div class= "bt_wrap">
 				<a href="index" class="on">목록</a>

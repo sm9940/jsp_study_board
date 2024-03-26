@@ -140,6 +140,7 @@ public class BoardController extends HttpServlet {
 		//게시글을 수정해준다.
 		public String updateBoard(HttpServletRequest req) {
 			Board b = new Board();
+			String origin_file = req.getParameter("origin_file");
 			try {
 				BeanUtils.populate(b, req.getParameterMap());
 				//1.이미지 파일 서버(c:/Temp/img)에 저장
@@ -147,14 +148,18 @@ public class BoardController extends HttpServlet {
 				String fileName= getFileName(part); //파일명 얻음
 				//fileName이 null이 아니고 length()도 0이 아닌지
 				//업로드도 파일이 있는지 확인
-				if(fileName != null && !fileName.isEmpty()){
-					part.write(fileName); //서버에 파일 업로드
-					//2.이미지 파일 이름을 Board객체에 저장
-					b.setImg("/img/"+fileName);
+			if(fileName != null && !fileName.isEmpty()) {
+				part.write(fileName);//서버에 파일 업로드
+				
+				//2. 경로를 포함한 이미지 파일 이름을 Board 객체에 저장
+				b.setImg("/img/" + fileName);
+			}	else {//업로드된 파일이 없을때
+				if(origin_file ==null || origin_file.equals("")) {
+					b.setImg(null);
 				} else {
-					b.setImg(null); //업로드한 이미지가 없을 경우 빈문자열 저장
+					b.setImg(origin_file);
 				}
-						
+			}
 					dao.updateBoard(b);
 			} catch (Exception e) {
 				e.printStackTrace();
